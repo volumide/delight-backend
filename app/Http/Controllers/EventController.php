@@ -67,7 +67,7 @@ class EventController extends Controller
 
     //get event by id
     public function getEvent($id){
-    	$event = vent::find($id)
+    	$event = vent::find($id);
 
     	if(!$blog){
     		return response()->json([

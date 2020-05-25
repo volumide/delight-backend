@@ -14,7 +14,8 @@ class LeadersController extends Controller
     	Leaders::create($input);
     	return response()->json([
     		"status" => "success",
-    		"message" => "profile created successfully"
+			"message" => "profile created successfully"
+		]);
     }
 
     //update leader's profile by id
@@ -39,7 +40,7 @@ class LeadersController extends Controller
     		], 404);    	
     	}
 
-    	$leader->delete()
+    	$leader->delete();
 		return response()->json([
     		"status" => "success",
     		"message" => "profile deleted successfully"

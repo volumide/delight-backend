@@ -65,7 +65,7 @@ class BlogController extends Controller
     }
 
     public function getBlog($id){
-    	$blog = Blog::find($id)
+    	$blog = Blog::find($id);
 
     	if(!$blog){
     		return response()->json([
