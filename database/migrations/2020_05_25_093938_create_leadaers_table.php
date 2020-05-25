@@ -16,7 +16,7 @@ class CreateLeadaersTable extends Migration
         Schema::create('leaders', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image_url');
+            $table->string('picture')->nullable();
             $table->string('office');
             $table->timestamps();
         });

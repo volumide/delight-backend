@@ -27,6 +27,11 @@ Route::get('event/{id}', 'EventController@getEvent');
 // Comment api
 Route::post('create/event', 'CommentController@newComment');
 Route::delete('remove/event/{id}', 'CommentController@removeComment');
-
 //id is based on blog id
 Route::get('get/comment/{id}', 'CommentController@getComment');
+
+
+//Email route
+Route::post('subscribe/to/mailing/list', 'EmailController@subscribeToMailList');
+Route::delete('unsubscribe/from/mailing/list', 'EmailController@unsubscribeFromMail');
+Route::post('send/mail/to/subscribers', 'EmailController@sendMail');

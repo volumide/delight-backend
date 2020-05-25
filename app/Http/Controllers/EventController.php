@@ -20,7 +20,6 @@ class EventController extends Controller
 
     //delete event
     public function removeEvent($id){
-
     	$blog = Event::find($id);
 
     	if (!$blog) {
@@ -38,7 +37,7 @@ class EventController extends Controller
 	    ]);
     }
 
-	//modify blog content
+	//modify blog content by id
     public function editEvent(Request $request, $id){
     	$input = $request->all();
 		$blog = Event::find($id);
@@ -59,15 +58,25 @@ class EventController extends Controller
 
     //get all events 
     public function getAllEvents(){
+		$events = Event::all();
+
+		if(!$events){
+			return response()->json([
+				"status" => "success",
+				"message" => "No current event"
+			]);
+		}
+
     	return response()->json([
     		"status" => 'success',
-    		"data" => Event::all()
-    	]);
+    		"data" => $events
+		]);
+		
     }
 
     //get event by id
     public function getEvent($id){
-    	$event = vent::find($id);
+    	$event = Event::find($id);
 
     	if(!$blog){
     		return response()->json([

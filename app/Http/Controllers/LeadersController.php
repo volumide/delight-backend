@@ -21,7 +21,6 @@ class LeadersController extends Controller
     //update leader's profile by id
     public function updateLeaderProfile(Request $request, $id){
     	$input = $request->all();
-
     	Leaders::where('id', $id)->update($input);
     	return response()->json([
     		"status" => "success",
@@ -49,9 +48,17 @@ class LeadersController extends Controller
 
     //get all leaders
     public function getLeaders(){
+		$leaders = Leaders::all();
+
+		if(!$leaders){
+			return response()->json([
+				"status" => "success",
+				"message" => "No leader record found"
+			]);
+		}
     	return response()->json([
     		"status" => "success",
-    		"data" => Leaders::all()
+    		"data" => $leaders
     	]);
     }
 

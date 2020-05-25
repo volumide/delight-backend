@@ -37,9 +37,8 @@ class BlogController extends Controller
     	], 404);
     }
 
-    //delete blog
+    //delete blog admin
     public function removeBlog($id){
-
     	$blog = Blog::find($id);
 
     	if (!$blog) {
@@ -58,6 +57,15 @@ class BlogController extends Controller
     }
 
     public function getAllBlog(){
+		$blogs = Blog::all();
+
+		if(!$blogs){
+			return response()->json([
+				"status" => 'success',
+				"message" => 'No blog created come back later'
+			]);
+		}
+
     	return response()->json([
     		"status" => 'success',
     		"data" => Blog::all()

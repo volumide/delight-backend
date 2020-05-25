@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->string('blog_id');
             $table->string('comment');
-            $table->string('alias');
+            $table->string('alias')->nullable();
             $table->timestamps();
         });
     }
