@@ -14,7 +14,7 @@ Route::get('blog/{id}', 'BlogController@getblog');
 Route::post('create/leader/profile', 'LeadersController@createLeaderProfile');
 Route::put('update/leader/profile/{id}', 'LeadersController@updateLeaderProfile');
 Route::delete('remove/leader/profile/{id}', 'LeadersController@removeLeaderProfile');
-Route::get('update/leaders', 'LeadersController@getLeaders');
+Route::get('get/leaders', 'LeadersController@getLeaders');
 Route::get('get/leader/profile/{id}', 'LeadersController@getLeaderProfile');
 
 // Events api
