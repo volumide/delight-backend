@@ -29,7 +29,7 @@ class CommentController extends Controller
     }
 
     // admin delete comment
-    public function removeComment(Request $request){
+    public function removeComment(Request $request, $id){
     	$comment= Comment::find($id);
 
     	if (!$comment) {
@@ -63,5 +63,20 @@ class CommentController extends Controller
     		"message" => "comments retrived",
     		"data" => $comments
     	]);
-    }
+	}
+	
+	public function getAllComment(){
+		$comment = Comment::all();
+		if(count($comment) < 1){
+			return response()->json([
+				"status" => 'success',
+				"message" => 'No comment in database'
+			]);
+		}
+
+    	return response()->json([
+    		"status" => 'success',
+    		"data" => Comment::all()
+    	]);
+	}
 }

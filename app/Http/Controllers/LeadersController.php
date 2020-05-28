@@ -65,7 +65,7 @@ class LeadersController extends Controller
     //get leaders by id 
     public function getLeaderProfile($id){
 
-     	$leader = Leaders::findorfail($id);
+     	$leader = Leaders::find($id);
 
      	if(!$leader){
      		return response()->json([

@@ -33,16 +33,17 @@ class EventController extends Controller
 
     	return response()->json([
     		"status" => "success",
-    		"message" => "event removed successfully"
+			"message" => "event removed successfully",
+			"data" => Event::all()
 	    ]);
     }
 
 	//modify blog content by id
     public function editEvent(Request $request, $id){
     	$input = $request->all();
-		$blog = Event::find($id);
+		$event = Event::find($id);
 
-		if (!$blog) {
+		if (!$event) {
 			return response()->json([
 	    		"status" => "fail",
 	    		"message" => "not found"
@@ -51,16 +52,17 @@ class EventController extends Controller
 
     	Event::where('id', $id)->update($input);
     	return response()->json([
-    		"status" => "fail",
-    		"message" => "not found"
-    	], 404);
+    		"status" => "success",
+			"message" => "updated successfully",
+			"data" => Event::find($id)
+    	]);
     }
 
     //get all events 
     public function getAllEvents(){
 		$events = Event::all();
 
-		if(!$events){
+		if(count($events) < 1){
 			return response()->json([
 				"status" => "success",
 				"message" => "No current event"
@@ -78,7 +80,7 @@ class EventController extends Controller
     public function getEvent($id){
     	$event = Event::find($id);
 
-    	if(!$blog){
+    	if($event){
     		return response()->json([
 	    		"status" => 'fail',
 	    		"message" => "not found"

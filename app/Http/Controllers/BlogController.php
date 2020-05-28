@@ -11,10 +11,11 @@ class BlogController extends Controller
     public function newBlog(Request $request){
     	$input = $request->all();
 
-    	Blog::create($input);
+    	$create = Blog::create($input);
     	return response()->json([
     		"status" => "success",
-    		"message" => "Blog created successfully"
+			"message" => "Blog created successfully",
+			"data" => $create
     	]);
     }
 
@@ -32,8 +33,9 @@ class BlogController extends Controller
 
     	Blog::where('id', $id)->update($input);
     	return response()->json([
-    		"status" => "fail",
-    		"message" => "not found"
+    		"status" => "success",
+			"message" => "Updated successfully",
+			"data" => Blog::find($id)
     	], 404);
     }
 
