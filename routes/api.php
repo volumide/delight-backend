@@ -36,3 +36,8 @@ Route::get('get/comment/{id}', 'CommentController@getComment');
 Route::post('subscribe/to/mailing/list', 'EmailController@subscribeToMailList');
 Route::delete('unsubscribe/from/mailing/list', 'EmailController@unsubscribeFromMail');
 Route::post('send/mail/to/subscribers', 'EmailController@sendMail');
+
+// count all database 
+Route::get('count', 'BlogController@dataCount');
+Route::post('upload/image', 'BlogController@uploadImage');
+Route::post('upload/image/option', 'BlogController@uploadFile');

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Blog;
-
+use App\Event;
+use App\Leaders;
+use App\Comment;
 class BlogController extends Controller
 {
 	//create new blog
@@ -36,8 +39,18 @@ class BlogController extends Controller
     		"status" => "success",
 			"message" => "Updated successfully",
 			"data" => Blog::find($id)
-    	], 404);
-    }
+    	]);
+	}
+	
+	public function dataCount(){
+		return \response()->json([
+			"status" => "success",
+			"event" => count(Event::all()),
+			"profile" => count(Leaders::all()),
+			"blog" => count(Blog::all()),
+			"comment" => count(Comment::all()),
+		]);
+	}
 
     //delete blog admin
     public function removeBlog($id){
@@ -88,6 +101,30 @@ class BlogController extends Controller
     		"status" => 'success',
     		"data" => $blog
     	]);
-    }
+	}
+	
+	public function uploadImage(Request $request){
+		$file_name = rand(). "".  $request->image->getClientOriginalName();
 
+        $upload =  $request->image->move(storage_path('app/public/'), $file_name);
+		$url = \getenv("APP_URL") . "" . Storage::url('app/public/'.$file_name);
+
+		return response()->json([
+			"name" => $file_name,
+			"size" => getimagesize($url),
+			"url"=> $url,
+		]);
+	}
+
+	// public function uploadFile(Request $request){
+	// 	$file = $request->file('image')->getClientOriginalName();
+	// 	$storagePath = Storage::disk('public')->put($file, $file);
+	// 	$url = Storage::disk('public')->url($file);
+	// 	// $size = Storage::size($file);
+
+	// 	return response()->json([
+	// 		// "size" => $size,
+	// 		"url" => $url
+	// 	]);
+	// }
 }
