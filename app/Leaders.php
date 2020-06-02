@@ -8,6 +8,6 @@ class Leaders extends Model
 {
     protected $table = 'leaders';
     protected $fillable = [
-    	'name', 'image_url', 'office'
+    	'name', 'picture', 'office'
     ];
 }

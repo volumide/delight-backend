@@ -8,6 +8,7 @@ use App\Blog;
 use App\Event;
 use App\Leaders;
 use App\Comment;
+use App\Gallery;
 class BlogController extends Controller
 {
 	//create new blog
@@ -74,7 +75,7 @@ class BlogController extends Controller
     public function getAllBlog(){
 		$blogs = Blog::all();
 
-		if(!$blogs){
+		if(count($blogs) < 1){
 			return response()->json([
 				"status" => 'success',
 				"message" => 'No blog created come back later'
@@ -102,8 +103,76 @@ class BlogController extends Controller
     		"data" => $blog
     	]);
 	}
-	
+
+	public function postPictureToGallery(Request $request){
+		$input = $request->all();
+
+		$create = Gallery::create($input);
+
+    	return response()->json([
+    		"status" => "success",
+			"message" => "Blog created successfully",
+			"data" => Gallery::find($create->id)
+    	]);
+	}
+
+	public function getAllGalleryPictures(){
+		$gallery = Gallery::all();
+
+		if(count($gallery) < 1){
+			return response()->json([
+				"status" => 'success',
+				"message" => 'Picture in gallery'
+			]);
+		}
+
+    	return response()->json([
+			"status" => 'success',
+			"message" => "picture retrieved successfully",
+    		"data" => $gallery
+    	]);
+	}
+
+	public function getPicture($id){
+    	$gallery = Gallery::find($id);
+
+    	if(!$blog){
+    		return response()->json([
+	    		"status" => 'fail',
+	    		"message" => "not found"
+	    	], 404);
+	    }
+
+	    return response()->json([
+    		"status" => 'success',
+    		"data" => $gallery
+    	]);
+	}
+
+	public function removePictureFromGallery($id){
+		$gallery = Gallery::find($id);
+
+    	if (!$gallery) {
+			return response()->json([
+	    		"status" => "fail",
+	    		"message" => "not found"
+	    	], 404);
+    	}
+
+    	$gallery->delete();
+
+    	return response()->json([
+    		"status" => "success",
+    		"message" => "Deleted successfully"
+	    ]);
+	}
+
 	public function uploadImage(Request $request){
+
+		if (is_null($request->image)) {
+			return null;
+		}
+
 		$file_name = rand(). "".  $request->image->getClientOriginalName();
 
         $upload =  $request->image->move(storage_path('app/public/'), $file_name);
@@ -116,15 +185,5 @@ class BlogController extends Controller
 		]);
 	}
 
-	// public function uploadFile(Request $request){
-	// 	$file = $request->file('image')->getClientOriginalName();
-	// 	$storagePath = Storage::disk('public')->put($file, $file);
-	// 	$url = Storage::disk('public')->url($file);
-	// 	// $size = Storage::size($file);
 
-	// 	return response()->json([
-	// 		// "size" => $size,
-	// 		"url" => $url
-	// 	]);
-	// }
 }

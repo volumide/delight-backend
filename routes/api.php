@@ -24,6 +24,12 @@ Route::put('update/event/{id}', 'EventController@editEvent');
 Route::get('all/event', 'EventController@getAllEvents');
 Route::get('event/{id}', 'EventController@getEvent');
 
+// Gallery api
+Route::post('upload/gallery/image', 'BlogController@postPictureToGallery');
+Route::delete('delete/image/{id}', 'BlogController@removePictureFromGallery');	
+Route::get('all/images', 'BlogController@getAllGalleryPictures');
+Route::get('image/{id}', 'BlogController@getPicture');
+
 // Comment api
 Route::post('create/comment', 'CommentController@newComment');
 Route::delete('remove/comment/{id}', 'CommentController@removeComment');
@@ -40,4 +46,4 @@ Route::post('send/mail/to/subscribers', 'EmailController@sendMail');
 // count all database 
 Route::get('count', 'BlogController@dataCount');
 Route::post('upload/image', 'BlogController@uploadImage');
-Route::post('upload/image/option', 'BlogController@uploadFile');
+// Route::post('upload/image/option', 'BlogController@uploadFile');

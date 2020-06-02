@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Gallery extends Model
 {
-    protected $table = 'events';
+    protected $table = 'gallery';
     protected $fillable = [
-    	'title', 'picture', 'content'
+        'picture', 'caption'
     ];
 }
