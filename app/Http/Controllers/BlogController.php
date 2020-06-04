@@ -50,6 +50,7 @@ class BlogController extends Controller
 			"profile" => count(Leaders::all()),
 			"blog" => count(Blog::all()),
 			"comment" => count(Comment::all()),
+			"gallery" => count(Gallery::all())
 		]);
 	}
 
@@ -90,6 +91,23 @@ class BlogController extends Controller
 
     public function getBlog($id){
     	$blog = Blog::find($id);
+
+    	if(!$blog){
+    		return response()->json([
+	    		"status" => 'fail',
+	    		"message" => "not found"
+	    	], 404);
+	    }
+
+	    return response()->json([
+    		"status" => 'success',
+    		"data" => $blog
+    	]);
+	}
+
+
+	public function getBlogByTitle($title){
+		$blog = Blog::where('title', $title)->first();
 
     	if(!$blog){
     		return response()->json([

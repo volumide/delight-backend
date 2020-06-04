@@ -8,6 +8,6 @@ class Comment extends Model
 {
     protected $table = 'comments';
     protected $fillable = [
-    	'blog_id', 'comment', 'alias'
+    	'blog_id', 'comment', 'alias', 'reference'
     ];
 }

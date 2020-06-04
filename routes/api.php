@@ -8,7 +8,8 @@ Route::post('create/blog', 'BlogController@newBlog');
 Route::put('update/blog/{id}', 'BlogController@editBlog');
 Route::delete('delete/blog/{id}', 'BlogController@removeBlog');	
 Route::get('all/blog', 'BlogController@getAllBlog');
-Route::get('blog/{id}', 'BlogController@getblog');
+Route::get('blog/{id}', 'BlogController@getBlog');
+Route::get('blog/by/{title}', 'BlogController@getBlogByTitle');
 
 // leaders api
 Route::post('create/leader/profile', 'LeadersController@createLeaderProfile');
